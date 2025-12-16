@@ -1,0 +1,14 @@
+kind: Service # Defines to create service type object
+apiVersion: v1
+metadata:
+  name: demoservice
+
+spec:
+  ports:
+    - port: 80 #service port maps to container port (VIP:Service Port)
+      targetPort: 80 # Container port
+
+  selector:
+    name: deployment # Aplly this service to any manifest wich has the specific label
+
+  type: LoadBalancer # Specifies the service configuration i.e VIP/Cluster IP
