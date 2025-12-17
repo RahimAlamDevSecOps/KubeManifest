@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+    - image: ubuntu
+      name: c01
+      command: ["/bin/bash", "-c", "while true; do echo 'Container c01 is running'; sleep 1000; done"]
+      volumeMounts:
+        - mountPath: /tmp/contdir
+          name: testvolume
+  volumes:
+    - name: testvolume
+      hostPath:
+        path: /tmp/hostdir
