@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myvolconfig
+spec:
+  containers:
+    - name: c1
+      image: ubuntu
+      command: ["/bin/bash", "-c", "while true; do echo Hello-Rahim; sleep 5; done"]
+
+      volumeMounts:
+        - name: testconfigmap # Volume name
+          mountPath: "/tmp/config"   #(This is directory inside container. The config files will be mounted here)
+  volumes:
+    - name: testconfigmap # Volume name
+      configMap:
+        name: mymap # this should match the config map name created in the first step
+        items:
+          - key: samplefile # the name of the file used while creating the configmap
+            path: samplefile #In the container, the file in which you want to save (Destination). If you don't give any name, default file i.e /tmp/config/samplefile inside container.

@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: myjob
+spec:
+  schedule:  "* * * * *" # Every one minute
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - image: ubuntu
+              name: mycont
+              command: ["/bin/bash", "-c", "echo Rahimdemy; sleep 10"]
+          restartPolicy: Never # Terminated pod won't get started again. New Pod gets created in place of it.
